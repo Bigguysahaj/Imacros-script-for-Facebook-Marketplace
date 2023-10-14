@@ -1,0 +1,65 @@
+VERSION BUILD=8970419 RECORDER=FX
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+SET !EXTRACT_TEST_POPUP NO
+SET !TIMEOUT_STEP 100
+SET !LOOP 2
+
+' Fill in the CSV and image folder names
+'Should have the same names without spaces
+SET !VAR2 master_printing_ice
+' Fill in the PC / Laptop username. Usually found in the C directory
+' If it contains spaces, add <SP>. Example: My<SP>PC
+SET !VAR3 C:\Users\Alfatayah
+
+SET !DATASOURCE_DELIMITER ;
+SET !DATASOURCE {{!VAR2}}.csv
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*90 + 30); randomNumber;")
+TAB T=1
+URL GOTO=https://iphone.facebook.com/marketplace/selling/item/
+REFRESH
+'OPEN TAB
+'TAB T=2
+'URL GOTO=https://whoer.net/
+WAIT SECONDS=5
+'CLOSE TAB
+'TAB T=1
+URL GOTO=https://facebook.com/marketplace/create
+WAIT SECONDS=5
+'CLICK "SELLING ITEM"
+TAG POS=1 TYPE=SPAN ATTR=TXT:"Selling Item"
+WAIT SECONDS=5
+REFRESH
+WAIT SECONDS=5
+
+' GET FB PROFILE NAME
+WAIT SECONDS=2
+TAG XPATH="//div[@aria-label='Marketplace']/div/div[2]/div/div/div[2]/div/div/div/div[1]/span/span" EXTRACT=TXT
+SET !EXTRACT EVAL("var s=\"{{!EXTRACT}}\"; s.toLowerCase()")
+SET !VAR4 EVAL("\"{{!EXTRACT}}\".replace(/\s/g, '');")
+WAIT SECONDS=2
+
+' UPLOAD IMAGES
+TAG POS=* TYPE=DIV ATTR=CLASS:"bp9cbjyn j83agx80"&&TXT:*
+WAIT SECONDS=1
+TAG POS=1 TYPE=INPUT:FILE ATTR=ID:* CONTENT={{!VAR3}}\Documents\iMacros\Datasources\FBMP\{{!VAR2}}\{{!COL1}}
+WAIT SECONDS=3
+SET Empty_Cell EVAL("var c3='{{!COL7}}'; var x,y,z; x=c3.length; if(x==0){z=0;} else{z=1;}; z;")
+TAG POS={{Empty_Cell}} TYPE=INPUT:FILE ATTR=ID:* CONTENT={{!VAR3}}\Documents\iMacros\Datasources\FBMP\{{!VAR2}}\{{!COL7}}
+WAIT SECONDS=3
+SET Empty_Cell EVAL("var c3='{{!COL8}}'; var x,y,z; x=c3.length; if(x==0){z=0;} else{z=1;}; z;")
+TAG POS={{Empty_Cell}} TYPE=INPUT:FILE ATTR=ID:* CONTENT={{!VAR3}}\Documents\iMacros\Datasources\FBMP\{{!VAR2}}\{{!COL8}}
+WAIT SECONDS=3
+SET Empty_Cell EVAL("var c3='{{!COL9}}'; var x,y,z; x=c3.length; if(x==0){z=0;} else{z=1;}; z;")
+TAG POS={{Empty_Cell}} TYPE=INPUT:FILE ATTR=ID:* CONTENT={{!VAR3}}\Documents\iMacros\Datasources\FBMP\{{!VAR2}}\{{!COL9}}
+WAIT SECONDS=3
+SET Empty_Cell EVAL("var c3='{{!COL10}}'; var x,y,z; x=c3.length; if(x==0){z=0;} else{z=1;}; z;")
+TAG POS={{Empty_Cell}} TYPE=INPUT:FILE ATTR=ID:* CONTENT={{!VAR3}}\Documents\iMacros\Datasources\FBMP\{{!VAR2}}\{{!COL10}}
+WAIT SECONDS=3
+SET Empty_Cell EVAL("var c3='{{!COL11}}'; var x,y,z; x=c3.length; if(x==0){z=0;} else{z=1;}; z;")
+TAG POS={{Empty_Cell}} TYPE=INPUT:FILE ATTR=ID:* CONTENT={{!VAR3}}\Documents\iMacros\Datasources\FBMP\{{!VAR2}}\{{!COL11}}
+WAIT SECONDS=3
+SET Empty_Cell EVAL("var c3='{{!COL12}}'; var x,y,z; x=c3.length; if(x==0){z=0;} else{z=1;}; z;")
+TAG POS={{Empty_Cell}} TYPE=INPUT:FILE ATTR=ID:* CONTENT={{!VAR3}}\Documents\iMacros\Datasources\FBMP\{{!VAR2}}\{{!COL12}}
+WAIT SECONDS=3
+SET Empty_Cell EVAL("var c3='{{!COL13}}'; var x,y,z; x=c3.length; if(x==0){z=0;} else{z
